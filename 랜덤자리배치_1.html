@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>랜덤게임~.~</title>
+    <meta name="keywords" content="자리배치">
+    <meta name="description" content="gsitm 자리배치 페이지">
+    <style>
+    #page-wrapper{
+      max-width: 500px;
+      height: 500px;
+      margin: auto;
+    }
+    .button{
+      margin: 20px 20px;
+    }
+    .screen{
+      width: 50%;
+      margin-left: 120px;
+      border: 1px solid #81DAF5;
+      font-size:10px;
+      color: #00BFFF;
+      font-weight: bold;
+      text-align: center;
+    }
+    .seat-table, .seat-table-row, .seat-table-col{
+      width: 220px;
+      height: 30px;
+      border: 2px solid #bbb;
+    }
+    #seat-table1{
+      margin : 30px 25px;
+      position: absolute;
+    }
+    #seat-table2{
+      margin : 30px 30px;
+      position: relative;
+      left: 230px;
+    }
+    </style>
+    <script type="text/javascript">
+    function random (name,gender) {
+      var seat = '';
+      var tablenum = 0;
+      var col = 0;
+      var row = 0;
+      tablenum = (Math.floor(Math.random()*2)+1);
+      if(tablenum == 2){
+        row = (Math.floor(Math.random()*7)+1);
+      }else if(tablenum == 1){
+        row = (Math.floor(Math.random()*6)+1);
+      }
+      col = (Math.floor(Math.random()*4)+1);
+      var number = tablenum + col + row;
+      var result = checkSeat(number,gender);
+      if(result == false){
+        return random(name,gender);
+      }else{
+        if(tablenum == 1){
+          seat = document.getElementById("seat-table1").rows[row].cells;
+        }else if(tablenum == 2){
+          seat = document.getElementById("seat-table2").rows[row].cells;
+        }
+        seat[col].innerHTML = name;
+      }
+      return true;
+    }
+    function checkSeat(number, gender){
+      var id = 'table' + number;
+      var check = document.getElementById(id);
+      // if(tablenum == 1){
+      //   check = document.getElementById("seat-table1").rows[row].cells;
+      // }else if(tablenum == 1){
+      //   check = document.getElementById("seat-table2").rows[row].cells;
+      // }
+
+      if(gender == 'w'){
+        for(var i=0; i<4; i++){
+          id.replace()
+          if( check[i].isnull){
+            return false;
+          }
+        }
+      }else if(gender == 'm'){
+        if( check[col] == ''){
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function clickEvent(){
+      var woman = ['박보미','이경화','김수진','유희수','박소현','조은솔','장진영','김윤지','채유진','최영롱','진민영','고하윤','강혜정'];
+      var man = ['백기반','송현석','김준혁','손혜성','은종현','최규호','김효상','이종건','정진','손원락','신종욱','최준우','남동길','오병준','우연찬',
+        '차주현','김민재','정광수','위재원','임혜성','김진우','이상훈','성동원','조국','김동범','이경민','허빛찬샘','김주승','조현우','이창주','김종주','이융성','주형진','정동주','박민주','노종범','이인성'];
+
+        for(var i=0; i<=12; i++){
+          random(woman[i],'w');
+        }
+
+        for(var i=0; i<=36; i++){
+          random(man[i],'m');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="page-wrapper">
+      <button class="button" onclick="clickEvent()">자리 바꾸기</button>
+      <div class="screen"> 스크린 </div>
+      <table class="seat-table" id="seat-table1">
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table111"></td>
+          <td class="seat-table-col" id="table112"></td>
+          <td class="seat-table-col" id="table113"></td>
+          <td class="seat-table-col" id="table114"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table121"></td>
+          <td class="seat-table-col" id="table123"></td>
+          <td class="seat-table-col" id="table123"></td>
+          <td class="seat-table-col" id="table124"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table131"></td>
+          <td class="seat-table-col" id="table132"></td>
+          <td class="seat-table-col" id="table133"></td>
+          <td class="seat-table-col" id="table134"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table141"></td>
+          <td class="seat-table-col" id="table142"></td>
+          <td class="seat-table-col" id="table143"></td>
+          <td class="seat-table-col" id="table144"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table151"></td>
+          <td class="seat-table-col" id="table152"></td>
+          <td class="seat-table-col" id="table153"></td>
+          <td class="seat-table-col" id="table154"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table161"></td>
+          <td class="seat-table-col" id="table162"></td>
+          <td class="seat-table-col" id="table163"></td>
+          <td class="seat-table-col" id="table164"></td>
+        </tr>
+      </table>
+      <table class="seat-table" id="seat-table2">
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table211"></td>
+          <td class="seat-table-col" id="table212"></td>
+          <td class="seat-table-col" id="table213"></td>
+          <td class="seat-table-col" id="table214"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table221"></td>
+          <td class="seat-table-col" id="table222"></td>
+          <td class="seat-table-col" id="table223"></td>
+          <td class="seat-table-col" id="table224"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table231"></td>
+          <td class="seat-table-col" id="table232"></td>
+          <td class="seat-table-col" id="table233"></td>
+          <td class="seat-table-col" id="table234"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table241"></td>
+          <td class="seat-table-col" id="table242"></td>
+          <td class="seat-table-col" id="table243"></td>
+          <td class="seat-table-col" id="table244"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table251"></td>
+          <td class="seat-table-col" id="table252"></td>
+          <td class="seat-table-col" id="table253"></td>
+          <td class="seat-table-col" id="table254"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table261"></td>
+          <td class="seat-table-col" id="table262"></td>
+          <td class="seat-table-col" id="table263"></td>
+          <td class="seat-table-col" id="table264"></td>
+        </tr>
+        <tr class="seat-table-row">
+          <td class="seat-table-col" id="table271"></td>
+          <td class="seat-table-col" id="table271"></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
