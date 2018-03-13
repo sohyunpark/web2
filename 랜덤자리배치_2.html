@@ -39,63 +39,64 @@
     }
     </style>
     <script type="text/javascript">
-      function pickSeat(){
-        var tablenum = (Math.floor(Math.random()*2)+1);
-        if(tablenum == 2){
-          var col = (Math.floor(Math.random()*7)+1);
-        }else{
-          var col = (Math.floor(Math.random()*6)+1);
-        }
-        var row = (Math.floor(Math.random()*4)+1);
-
-        var seatNum = tablenum.toString() + col.toString() + row.toString();
-        console.log(seatNum);
-        return seatNum;
-      }
-      function checkSeat(number, gender){
-        var id = 'table' + number;
-        var check = document.getElementById(eval("'"+id+"'")).innerHTML;
-
-        if(gender == 'w'){
-          for(var i=0; i<4; i++){
-            if( check[i] != ''){
-              return false;
-            }
-          }
-        }else if(gender == 'm'){
-          if( check[col] != ''){
+    // 자리 확인 함수
+    function checkSeat (seat, gender){
+      if(gender == 'w'){
+        var table = seat.substr(5,1);
+        var row = seat.substr(6,1);
+        for(var i=1; i<=4; i++){
+          var id = 'table' + table.toString() + row.toString() + i.toString();
+          var seat = document.getElementsByClassName(id).innerHTML;
+          if(seat != ''){
             return false;
           }
         }
-        return true;
-      }
-      function random (name,gender) {
-        var number = pickSeat();
-        var result = checkSeat(number,gender);
-        if(result == false){
-          return random(name,gender);
-        }else{
-          var id = "table" + number;
-          document.getElementById(eval("'"+id+"")).innerTEXT = name;
+      }else if(gender == 'm'){
+        var seat = document.getElementsByClassName(id).innerHTML;
+        if(seat != ''){
+          return false;
         }
-        return true;
       }
-      function clickEvent(){
-        var woman = ['박보미','이경화','김수진','유희수','박소현','조은솔','장진영','김윤지','채유진','최영롱','진민영','고하윤','강혜정'];
-        var man = ['백기반','송현석','김준혁','손혜성','은종현','최규호','김효상','이종건','정진','손원락','신종욱','최준우','남동길','오병준','우연찬',
-          '차주현','김민재','정광수','위재원','임혜성','김진우','이상훈','성동원','조국','김동범','이경민','허빛찬샘','김주승','조현우','이창주','김종주','이융성','주형진','박민주','노종범','이인성'];
-          for(var i=0; i<=12; i++){
-            random(woman[i],'w');
-          }
-          for(var i=0; i<=36; i++){
-            random(man[i],'m');
-          }
+      return true;
+    }
+    // 랜덤 자리 번호 함수
+    function pickSeat(){
+      var tablenum = (Math.floor(Math.random()*2)+1);
+      if(tablenum == 2){
+        var col = (Math.floor(Math.random()*7)+1);
+      }else{
+        var col = (Math.floor(Math.random()*6)+1);
+      }
+      var row = (Math.floor(Math.random()*4)+1);
+      var seatNum = 'table' + tablenum.toString() + col.toString() + row.toString();
+      return seatNum;
+    }
+    function pickMe(name,gender){
+      var seat = pickSeat();
+      var check = checkSeat(seat,gender);
+      if(!check){
+        pickMe(name,gender);
+      }else{
+        document.getElementsById(seat).innerHTML = name;
+      }
+    }
+    function clickEvent(){
+      document.getElementsByClassName('seat-table-col').innerHTML = '';
+      var woman = ['박보미','이경화','김수진','유희수','박소현','조은솔','장진영','김윤지','채유진','최영롱','진민영','고하윤','강혜정'];
+      var man = ['백기반','송현석','김준혁','손혜성','은종현','최규호','김효상','이종건','정진','손원락','신종욱','최준우','남동길','오병준','우연찬',
+        '차주현','김민재','정광수','위재원','임혜성','김진우','이상훈','성동원','조국','김동범','이경민','허빛찬샘','김주승','조현우','이창주','김종주','이융성','주형진','박민주','노종범','이인성'];
+        for(var i=0; i<woman.length; i++){
+          pickMe(woman[i],'w');
         }
+        for(var i=0; i<man.length; i++){
+          pickMe(man[i],'m');
+        }
+    }
     </script>
   </head>
   <body>
     <div id="page-wrapper">
-      <button class="button" onclick="pickSeat()">자리 바꾸기</button>
+      <button class="button" onclick="clickEvent()">자리 바꾸기</button>
       <div class="screen"> 스크린 </div>
       <table class="seat-table" id="seat-table1">
         <tr class="seat-table-row">
